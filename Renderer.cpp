@@ -1,20 +1,13 @@
 // Renderer.cpp
 #include "Renderer.h"
+#include "WindowManager.h"
+#include "Transform.h"
+#include <iostream>
 
 // Rest of your Renderer.cpp file
 
-
-
-// Constructor taking a Behavior pointer
-Renderer::Renderer(Renderer* renderer, Behavior* behavior)
-    : Component(behavior), isVisible(renderer->GetIsVisible()), sprite(renderer->GetSprite()), texture(renderer->GetTexture()), behavior(behavior) {}
-
-// Copy constructor taking a Behavior pointer
-Renderer::Renderer(Renderer& renderer, Behavior* behavior)
-    : Component(behavior), isVisible(renderer.GetIsVisible()), sprite(renderer.GetSprite()), texture(renderer.GetTexture()), behavior(behavior) {}
-
-Renderer::Renderer(const std::string& imagePath, Behavior* behavior)
-    : Component(behavior), behavior(behavior) {
+Renderer::Renderer(Behavior* behavior,const std::string& imagePath )
+    : Component(behavior) {
     if (!texture.loadFromFile(imagePath)) {
         std::cerr << "Failed to load image: " << imagePath << std::endl;
     }

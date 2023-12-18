@@ -145,7 +145,6 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllHeader.h" />
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="BehaviorManager.h" />
     <ClInclude Include="Collider.h" />

@@ -1,5 +1,6 @@
 #include "BehaviorManager.h"
-
+#include "Player.h"
+#include "Component.h"
 
 template Player* BehaviorManager::Instantiate<Player>();
 

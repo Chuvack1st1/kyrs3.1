@@ -1,4 +1,6 @@
-#include "AllHeader.h"
+#include "BehaviorManager.h"
+#include "WindowManager.h"
+#include "Player.h"
 
 void LiveCircle(BehaviorManager& behaviorManager, sf::RenderWindow& window) {
     behaviorManager.GlobalStart();

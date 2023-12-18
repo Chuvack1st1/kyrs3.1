@@ -1,13 +1,18 @@
 #include "Behavior.h"
+#include "GameObject.h"
+#include "Renderer.h"
+#include "Transform.h"
+#include "Collider.h"
+#include "SFML/Graphics.hpp"
 
+Behavior::Behavior() 
+{
+    _gameObject = AddComponent<GameObject>();
+    transform = AddComponent<Transform>();
+}
 
-Behavior::Behavior() : _gameObject(nullptr), transform(nullptr) {}
-
-Behavior::Behavior(GameObject& gameObject) : _gameObject(&gameObject), transform(&gameObject.transform) {}
-
-Behavior::Behavior(GameObject& gameObject, Transform& transform) : _gameObject(&gameObject), transform(&transform) {}
-
-template Renderer* Behavior::AddComponent(Renderer*&);
+template Renderer* Behavior::AddComponent<Renderer>(const std::string&);
+template Collider* Behavior::AddComponent<Collider>(const sf::RectangleShape&);
 
 template <typename T>
 T* Behavior::GetComponent() const {
@@ -23,7 +28,7 @@ T* Behavior::GetComponent() const {
 template <typename T, typename... Args>
 T* Behavior::AddComponent(Args&&... args) {
     // Create a new instance of T using the provided arguments and the Behavior pointer
-    T* newComponent = new T(std::forward<Args>(args)..., this);
+    T* newComponent = new T(this, std::forward<Args>(args)...);
 
     // Add the new component to the Components list
     this->Components.push_back(newComponent);
@@ -38,6 +43,8 @@ T* Behavior::AddComponent(Args&&... args) {
 
     return addedComponent;
 }
+
+
 
 void Behavior::Awake() {}
 

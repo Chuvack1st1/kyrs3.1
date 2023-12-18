@@ -1,7 +1,7 @@
 #include "Collider.h"
 
 
-Collider::Collider(const sf::RectangleShape& shapeToSet)
+Collider::Collider(Behavior* behavior, const sf::RectangleShape& shapeToSet) : Component(behavior)
 {
     isTrigger = false;
     // Create a new sf::RectangleShape and copy properties from shapeToSet

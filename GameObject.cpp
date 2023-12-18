@@ -1,6 +1,8 @@
 #include "GameObject.h"
+#include "Transform.h"
 
 
-GameObject::GameObject() : transform() {
-    transform.gameobject = this; // Set the gameobject pointer in Transform to this GameObject
+GameObject::GameObject(Behavior* behavior) : Component(behavior)
+{
+
 }

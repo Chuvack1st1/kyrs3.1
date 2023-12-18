@@ -1,5 +1,8 @@
 #include "Player.h"
-
+#include "Collider.h"
+#include "Vector2.h"
+#include "Renderer.h"
+#include <iostream>
 
 void Player::Init() {
     transform->position.x = 0.1f;
@@ -23,17 +26,10 @@ void Player::Move() {
 }
 
 void Player::Awake() {
-    // Assuming you have a Behavior pointer for the Player
-    Behavior* playerBehavior = this;  // Use 'this' as the Behavior pointer for the Player
-
-    // Create a new Renderer with the image path and the Behavior pointer
-    auto playergraphics = new Renderer("C:\\Users\\stasa\\Downloads\\images.jpg", playerBehavior);
-
-    // Add the Renderer as a component to the Player
-    AddComponent<Renderer>(playergraphics);
-    sf::RectangleShape shape;
-    
-    AddComponent<Collider>();
+    const std::string imagePath = "C:\\Users\\stasa\\Downloads\\images.jpg";
+    renderer = AddComponent<Renderer>(imagePath);
+    const sf::RectangleShape shape;
+    collider = AddComponent<Collider>(shape);
 }
 
 

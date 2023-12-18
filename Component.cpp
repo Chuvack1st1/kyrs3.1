@@ -1,15 +1,9 @@
 #include "Component.h"
 
 // Constructor that takes a Behavior pointer as a parameter
-Component::Component(Behavior* initialBehavior) : behavior(initialBehavior), position(initialBehavior->transform){
+Component::Component(Behavior* initialBehavior) : behavior(initialBehavior){
     
 }
-
-// Default constructor
-Component::Component() {
-    // You can perform additional initialization if needed
-}
-
 // Getter for the Behavior member
 Behavior* Component::GetBehavior() const {
     return behavior;

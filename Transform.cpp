@@ -3,4 +3,7 @@
 
 Transform::Transform() : gameobject(nullptr), position() {}
 
-Transform::Transform(const Transform& transform) : gameobject(transform.gameobject), position(transform.position) {}
+Transform::Transform(Behavior* behavior) : Component(behavior) {
+    // Initialize the Transform object
+}
+
