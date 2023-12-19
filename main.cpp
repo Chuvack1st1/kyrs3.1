@@ -1,34 +1,46 @@
+//main.cpp
 #include "BehaviorManager.h"
 #include "WindowManager.h"
 #include "Player.h"
+#include "Cat.h"
 
-void LiveCircle(BehaviorManager& behaviorManager, sf::RenderWindow& window) {
+void LiveCircle(BehaviorManager& behaviorManager) {
+    
     behaviorManager.GlobalStart();
 
-    while (window.isOpen()) {
+    while (WindowManager::Instance().GetWindow().isOpen()) {
+
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (WindowManager::Instance().GetWindow().pollEvent(event)) {
             if (event.type == sf::Event::Closed)
-                window.close();
+                WindowManager::Instance().GetWindow().close();
         }
+        WindowManager::Instance().GetWindow().clear();
 
-        behaviorManager.GlobalUpdate(); // Call behavior updates
+        
+        if (WindowManager::Instance().showInstructions) {
+            WindowManager::Instance().PlayStartAnimation();
+        }
+        else {
+            WindowManager::Instance().DrawBackGround();
 
-        window.clear();
-        behaviorManager.Render();
-        window.display();
+            behaviorManager.GlobalUpdate(); // Call behavior updates
+
+            behaviorManager.Render();
+        }
+            
+        WindowManager::Instance().GetWindow().display();
     }
 }
 
 int main() {
+    
     BehaviorManager behaviorManager;
     Player* player = behaviorManager.Instantiate<Player>();
-    Player* player2 = behaviorManager.Instantiate<Player>();
-
-    sf::RenderWindow& window = WindowManager::Instance().GetWindow();
+    Cat* player2 = behaviorManager.Instantiate<Cat>(player);
 
     behaviorManager.GlobalAwake();
-    LiveCircle(behaviorManager, window);
+    LiveCircle(behaviorManager);
     behaviorManager.RemoveAll();
 
     return 0;

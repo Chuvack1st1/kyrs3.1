@@ -35,5 +35,5 @@ void Renderer::Render() const{
 
 void Renderer::UpdatePosition()
 {
-    SetSpritePosition(GetBehavior()->transform->position);
+    SetSpritePosition(GetBehavior()->transform->GetPosition());
 }

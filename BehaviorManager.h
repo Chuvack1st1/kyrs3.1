@@ -22,7 +22,7 @@ using namespace std;
         void RemoveAll();
         void Render();
 
-        template <typename T>
-        T* Instantiate();
+        template <typename T, typename... Args>
+        T* Instantiate(Args&&... args);
     };
 

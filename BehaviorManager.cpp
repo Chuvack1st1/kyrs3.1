@@ -1,8 +1,10 @@
 #include "BehaviorManager.h"
 #include "Player.h"
 #include "Component.h"
+#include "Cat.h"
 
 template Player* BehaviorManager::Instantiate<Player>();
+template Cat* BehaviorManager::Instantiate<Cat>(Player*&);
 
 template <typename T>
 T* BehaviorManager::AddObject(T* behavior) {
@@ -51,6 +53,7 @@ void BehaviorManager::GlobalStart() {
 
 void BehaviorManager::GlobalUpdate() {
     CheckColliderEntering();
+    UpdateAllBehaviorComponents();
     UpdateAllBehavior();
 }
 
@@ -69,9 +72,9 @@ void BehaviorManager::Render() {
     }
 }
 
-template <typename T>
-T* BehaviorManager::Instantiate() {
-    T* object = new T();
+template <typename T, typename... Args>
+T* BehaviorManager::Instantiate(Args&&... args) {
+    T* object = new T(std::forward<Args>(args)...);
     object->transform = new Transform();
     return AddObject(object);
 }

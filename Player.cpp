@@ -5,29 +5,28 @@
 #include <iostream>
 
 void Player::Init() {
-    transform->position.x = 0.1f;
-    transform->position.y = 0.1f;
+    transform->SetPosition(Vector2(100.0f, 100.0f));
 }
 
 void Player::Move() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        transform->position = transform->position + Vector2(0, 1);
+        transform->SetPosition(Vector2(0, -1) + transform->GetPosition()); 
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        transform->position = transform->position + Vector2(0, -1);
+        transform->SetPosition(Vector2(0, 1) + transform->GetPosition());
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        transform->position = transform->position + Vector2(-1, 0);
+        transform->SetPosition(Vector2(-1, 0) + transform->GetPosition());
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        transform->position = transform->position + Vector2(1, 0);
+        transform->SetPosition(Vector2(1, 0) + transform->GetPosition());
     }
-    std::cout << transform->position.x << " " << transform->position.y << " \n";
 }
 
 void Player::Awake() {
-    const std::string imagePath = "C:\\Users\\stasa\\Downloads\\images.jpg";
+    const std::string imagePath = "C:\\Users\\stasa\\Downloads\\pixil-frame-0 (4).png";
     renderer = AddComponent<Renderer>(imagePath);
+
     const sf::RectangleShape shape;
     collider = AddComponent<Collider>(shape);
 }

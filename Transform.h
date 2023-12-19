@@ -6,10 +6,13 @@
 class GameObject;
 
 class Transform : public Component {
-public:
-    GameObject* gameobject; // Pointer to GameObject
+private:
     Vector2 position;
 
+public:
+    GameObject* gameobject; // Pointer to GameObject
+    void SetPosition(Vector2 newPosition);
+    Vector2 GetPosition();
     Transform();
     Transform(Behavior* behavior);
 };
